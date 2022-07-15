@@ -17,22 +17,27 @@ while True:
             pygame.quit()
             quit()
 
-        if GameVars.state_start:
+        if GameVars.current_state == GameVars.START_STATE:
             GameFunctions.listen_for_start()
+            keyhandle.handle_start_keys(event)
 
-        elif GameVars.state_game:
+        elif GameVars.current_state == GameVars.GAME_STATE or GameVars.TYPING_TEST_STATE:
             keyhandle.handle_game_keys(event)
 
-    if GameVars.state_start:
+    if GameVars.current_state == GameVars.START_STATE:
         GameFunctions.run_start_state()
 
-    elif GameVars.state_game:
-        GameFunctions.run_game_state()
+    elif GameVars.current_state == GameVars.GAME_STATE:
+        GameVars.SCREEN.fill((0,0,0))
+        # GameFunctions.run_game_state()
 
-    elif GameVars.state_pause:
+    elif GameVars.current_state == GameVars.PAUSE_STATE:
         pass
 
-    elif GameVars.state_end:
+    elif GameVars.current_state == GameVars.END_STATE:
         GameFunctions.run_end_state()
+
+    elif GameVars.current_state == GameVars.TYPING_TEST_STATE:
+        GameFunctions.run_typing_test_state()
 
     pygame.display.update()

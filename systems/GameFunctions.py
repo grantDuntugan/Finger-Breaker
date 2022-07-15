@@ -8,8 +8,7 @@ def listen_for_start():
     if pygame.mouse.get_pressed()[0]:
         pos = pygame.mouse.get_pos()
         if GameVars.start_button.in_bounds(pos):
-            GameVars.state_start = False
-            GameVars.state_game = True
+            GameVars.current_state = GameVars.GAME_STATE
 
 def get_and_set_next_word():
     GameVars.stack = []
@@ -19,7 +18,7 @@ def get_and_set_next_word():
         GameVars.stack.append(char)
     GameVars.start_time = time.time()
     GameVars.timer_running = True
-    GameVars.word_to_type_text = text.create_word_to_type_text()
+    GameVars.word_to_type_text = text.create_TT_word_to_type_text()
 
 def add_point():
     GameVars.timer_running = False
@@ -33,14 +32,13 @@ def subtract_life():
     GameVars.timer_running = False
 
 def end_game():
-    GameVars.state_game = False
-    GameVars.state_end = True
+    GameVars.current_state = GameVars.END_STATE
 
 def set_and_draw_text():
     GameVars.score_text = text.create_score_text()
     GameVars.lives_text = text.create_lives_text()
     GameVars.time_text = text.create_time_text(GameVars.start_time)
-    GameVars.letters_typed_text = text.create_letters_typed_text()
+    GameVars.letters_typed_text = text.create_TT_letters_typed_text()
 
     GameVars.score_text.draw()
     GameVars.lives_text.draw()
@@ -48,7 +46,7 @@ def set_and_draw_text():
     GameVars.word_to_type_text.draw()
     GameVars.letters_typed_text.draw()
 
-def run_game_state():
+def run_typing_test_state():
     GameVars.SCREEN.fill((0, 0, 0))
 
     if (GameVars.timer_running == False):
@@ -68,6 +66,9 @@ def run_start_state():
     GameVars.title_text = text.create_title_text()
     GameVars.title_text.draw()
     GameVars.start_button.draw()
+
+    if "".join(GameVars.secret_stack) == "test":
+        GameVars.current_state = GameVars.TYPING_TEST_STATE
 
 def run_end_state():
     GameVars.SCREEN.fill((0, 0, 0))
