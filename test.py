@@ -1,1 +1,0 @@
-print ((True, False, False) == True)

@@ -1,13 +1,15 @@
 import pygame
+from systems import constants
+
 class Text():
     def __init__(self, surface, text, size, color, x, y):
         font_name = pygame.font.match_font('leelawadee')
         self.surface = surface
         self.text = text
-        self.size = size 
+        self.size = size
         self.font = pygame.font.Font(font_name, self.size)
         self.color = color
-        self.x = x 
+        self.x = x
         self.y = y
 
     def draw(self):
@@ -37,8 +39,8 @@ def drawText(surface, text, color, rect, size, aa=False, bkg=None):
         while font.size(text[:i])[0] < rect.width and i < len(text):
             i += 1
 
-        # if we've wrapped the text, then adjust the wrap to the last word      
-        if i < len(text): 
+        # if we've wrapped the text, then adjust the wrap to the last word
+        if i < len(text):
             i = text.rfind(" ", 0, i) + 1
 
         # render the line and blit it to the surface
@@ -55,3 +57,11 @@ def drawText(surface, text, color, rect, size, aa=False, bkg=None):
         text = text[i:]
 
     return text
+
+def create_title_text():
+    return Text(constants.SCREEN,
+                "Finger Breaker",
+                100,
+                (255, 255, 255),
+                constants.SCREEN_WIDTH / 2,
+                constants.SCREEN_HEIGHT / 3)
