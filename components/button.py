@@ -1,5 +1,5 @@
 import pygame
-from systems import constants
+from systems import GameVars
 
 class Button(pygame.sprite.Sprite):
     def __init__(self, surface, x, y, width, height, text = ""):
@@ -33,9 +33,9 @@ class Button(pygame.sprite.Sprite):
         return False
 
 def create_start_button():
-    return Button(constants.SCREEN,
-                  constants.SCREEN_WIDTH // 2 - constants.SCREEN_WIDTH // 10,
-                  (constants.SCREEN_HEIGHT // 3) * 2,
-                  constants.SCREEN_WIDTH //5,
-                  constants.SCREEN_HEIGHT //10,
+    return Button(GameVars.SCREEN,
+                  GameVars.SCREEN_WIDTH // 2 - GameVars.SCREEN_WIDTH // 10,
+                  (GameVars.SCREEN_HEIGHT // 3) * 2,
+                  GameVars.SCREEN_WIDTH //5,
+                  GameVars.SCREEN_HEIGHT //10,
                   "Start")

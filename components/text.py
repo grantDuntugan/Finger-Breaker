@@ -1,5 +1,6 @@
 import pygame
-from systems import constants
+import time
+from systems import GameVars
 
 class Text():
     def __init__(self, surface, text, size, color, x, y):
@@ -59,9 +60,55 @@ def drawText(surface, text, color, rect, size, aa=False, bkg=None):
     return text
 
 def create_title_text():
-    return Text(constants.SCREEN,
+    return Text(GameVars.SCREEN,
                 "Finger Breaker",
                 100,
                 (255, 255, 255),
-                constants.SCREEN_WIDTH / 2,
-                constants.SCREEN_HEIGHT / 3)
+                GameVars.SCREEN_WIDTH / 2,
+                GameVars.SCREEN_HEIGHT / 3)
+
+def create_time_text(start_time):
+    return Text(GameVars.SCREEN,
+                str(int(time.time() - start_time - GameVars.time_out) * -1),
+                100,
+                (255, 0, 0),
+                GameVars.SCREEN_WIDTH //2 ,
+                GameVars.SCREEN_HEIGHT // 8)
+
+def create_letters_typed_text():
+    return Text(GameVars.SCREEN,
+                "".join(GameVars.user_stack),
+                100,
+                (255, 0, 255),
+                GameVars.SCREEN_WIDTH // 2,
+                (GameVars.SCREEN_HEIGHT // 3) * 2)
+
+def create_word_to_type_text():
+    return Text(GameVars.SCREEN,
+                "".join(GameVars.stack),
+                100,
+                (255, 255, 255),
+                GameVars.SCREEN_WIDTH // 2,
+                GameVars.SCREEN_HEIGHT // 2)
+
+def create_score_text():
+    return Text(GameVars.SCREEN,
+                "Score: " + str(GameVars.score),
+                100, (0, 250, 0),
+                GameVars.SCREEN_WIDTH//8,
+                GameVars.SCREEN_HEIGHT // 8)
+
+def create_lives_text():
+    return Text(GameVars.SCREEN,
+                "Lives: " + str(GameVars.lives),
+                100,
+                (0, 250, 0),
+                GameVars.SCREEN_WIDTH//8,
+                (GameVars.SCREEN_HEIGHT//8) * 2)
+
+def draw_wrapped_congrats_text():
+    drawText(GameVars.SCREEN,
+             "Congrats! Your score was " + str(GameVars.score) + ".",
+             (0, 250, 0),
+             (0, GameVars.SCREEN_HEIGHT // 3, GameVars.SCREEN_WIDTH, (GameVars.SCREEN_HEIGHT//3) * 2),
+             150)
