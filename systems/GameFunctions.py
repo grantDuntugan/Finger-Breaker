@@ -47,3 +47,28 @@ def set_and_draw_text():
     GameVars.time_text.draw()
     GameVars.word_to_type_text.draw()
     GameVars.letters_typed_text.draw()
+
+def run_game_state():
+    GameVars.SCREEN.fill((0, 0, 0))
+
+    if (GameVars.timer_running == False):
+        get_and_set_next_word()
+
+    if time.time() - GameVars.start_time >= GameVars.time_out:
+        subtract_life()
+        if GameVars.lives == 0:
+            end_game()
+
+    if GameVars.user_stack == GameVars.stack:
+        add_point()
+
+    set_and_draw_text()
+
+def run_start_state():
+    GameVars.title_text = text.create_title_text()
+    GameVars.title_text.draw()
+    GameVars.start_button.draw()
+
+def run_end_state():
+    GameVars.SCREEN.fill((0, 0, 0))
+    text.draw_wrapped_congrats_text()

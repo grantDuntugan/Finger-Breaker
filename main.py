@@ -24,30 +24,15 @@ while True:
             keyhandle.handle_game_keys(event)
 
     if GameVars.state_start:
-        title_text = text.create_title_text()
-        title_text.draw()
-        GameVars.start_button.draw()
+        GameFunctions.run_start_state()
 
     elif GameVars.state_game:
-        GameVars.SCREEN.fill((0,0,0))
-
-        if (GameVars.timer_running == False):
-            GameFunctions.get_and_set_next_word()
-
-        if time.time() - GameVars.start_time >= GameVars.time_out:
-            GameFunctions.subtract_life()
-            if GameVars.lives == 0:
-                GameFunctions.end_game()
-
-        if GameVars.user_stack == GameVars.stack:
-            GameFunctions.add_point()
-
-        GameFunctions.set_and_draw_text()
+        GameFunctions.run_game_state()
 
     elif GameVars.state_pause:
         pass
 
     elif GameVars.state_end:
-        GameVars.SCREEN.fill((0,0,0))
-        text.draw_wrapped_congrats_text()
+        GameFunctions.run_end_state()
+
     pygame.display.update()

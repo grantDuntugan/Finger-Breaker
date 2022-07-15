@@ -23,6 +23,7 @@ state_game = False
 state_pause = False
 state_end = False
 
+title_text = None
 score_text = None
 lives_text = None
 time_text = None
