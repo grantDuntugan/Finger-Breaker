@@ -1,6 +1,6 @@
 import pygame
 from systems import GameVars
-def handle_keys(event):
+def handle_game_keys(event):
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_q:
             GameVars.user_stack.append("q")

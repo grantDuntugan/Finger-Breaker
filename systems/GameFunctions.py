@@ -1,16 +1,27 @@
+import random
+import pygame
+import time
 from systems import GameVars
 from components import text
-import random
 
-def get_word_from_lib():
+def listen_for_start():
+    if pygame.mouse.get_pressed()[0]:
+        pos = pygame.mouse.get_pos()
+        if GameVars.start_button.in_bounds(pos):
+            GameVars.state_start = False
+            GameVars.state_game = True
+
+def get_and_set_next_word():
     GameVars.stack = []
     GameVars.user_stack = []
     word = random.choice(GameVars.word_lib)
     for char in word:
         GameVars.stack.append(char)
+    GameVars.start_time = time.time()
+    GameVars.timer_running = True
+    GameVars.word_to_type_text = text.create_word_to_type_text()
 
-
-def add_point_and_get_next_word():
+def add_point():
     GameVars.timer_running = False
     GameVars.score += 1
     if (GameVars.time_out > 2):

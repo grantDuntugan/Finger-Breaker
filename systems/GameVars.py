@@ -8,6 +8,8 @@ SCREEN_INFO = None
 SCREEN_WIDTH = None
 SCREEN_HEIGHT = None
 
+start_button = None
+
 stack = [] # Keeps track of typing order
 user_stack = [] # Keeps track of typing input
 score = 0
