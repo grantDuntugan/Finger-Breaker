@@ -14,13 +14,23 @@ PAUSE_STATE = 2
 END_STATE = 3
 TYPING_TEST_STATE = 4
 
+'''Intermediate Game State Variables'''
+enemy_state = 0
+word_state = 0
+ENEMY_DEAD = 0
+ENEMY_ALIVE = 1
+WORD_NOT_CREATED = 0
+WORD_BEING_TYPED = 1
+
 '''Start Screen Variables'''
 secret_stack = []
 start_button = None
 title_text = None
 
 '''Game Variables'''
-
+current_enemy = None
+health_bar = None
+enemy_group = None
 
 '''Typing Test Variables'''
 score = 0
