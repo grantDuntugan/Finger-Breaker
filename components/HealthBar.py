@@ -3,7 +3,7 @@ from systems import GameVars
 
 class HealthBar():
     def __init__(self, max_health):
-        self.max_length = 100
+        self.max_length = 750
         self.max_health = max_health
         self.current_health = self.max_health
 
@@ -17,7 +17,7 @@ class HealthBar():
             length = (self.current_health / self.max_health) * self.max_length
         pygame.draw.rect(GameVars.SCREEN,
                          (255, 0, 0),
-                         (100, 100, self.max_length, 20))
+                         ((GameVars.SCREEN_WIDTH // 2) - (self.max_length // 2), GameVars.SCREEN_HEIGHT // 2.8, self.max_length, 50))
         pygame.draw.rect(GameVars.SCREEN,
                          (0, 255, 0),
-                         (100, 100, length, 20))
+                         ((GameVars.SCREEN_WIDTH // 2) - (self.max_length // 2), GameVars.SCREEN_HEIGHT // 2.8, length, 50))

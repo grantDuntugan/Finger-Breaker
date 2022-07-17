@@ -14,10 +14,10 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.center = (x, y)
 
 def get_skeleton_enemy():
-    s = Enemy(skeleton_img,
-              1,
+    skeleton = Enemy(skeleton_img,
+              2.5,
               GameVars.SCREEN_WIDTH // 2,
               GameVars.SCREEN_HEIGHT // 2,
-              200)
-    s.image.set_colorkey((255,255,255))
-    return s
+              50)
+    skeleton.image.set_colorkey((255,255,255))
+    return skeleton

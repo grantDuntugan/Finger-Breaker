@@ -17,6 +17,7 @@ def get_next_word():
     word = random.choice(GameVars.word_lib)
     for char in word:
         GameVars.stack.append(char)
+    GameVars.word_state = GameVars.WORD_BEING_TYPED
 
 def get_and_set_next_word():
     GameVars.stack = []
@@ -28,31 +29,29 @@ def get_and_set_next_word():
     GameVars.timer_running = True
     GameVars.word_to_type_text = text.create_TT_word_to_type_text()
 
-def add_point():
-    GameVars.timer_running = False
-    GameVars.score += 1
-    if (GameVars.time_out > 2):
-        if GameVars.score % 3 == 0:
-            GameVars.time_out -= 1
-
-def subtract_life():
-    GameVars.lives -= 1
-    GameVars.timer_running = False
-
 def end_game():
     GameVars.current_state = GameVars.END_STATE
 
-def set_and_draw_text():
-    GameVars.score_text = text.create_score_text()
-    GameVars.lives_text = text.create_lives_text()
-    GameVars.time_text = text.create_time_text(GameVars.start_time)
-    GameVars.letters_typed_text = text.create_TT_letters_typed_text()
+def set_next_enemy():
+    GameVars.current_enemy = Enemy.get_skeleton_enemy()
+    GameVars.enemy_group.add(GameVars.current_enemy)
+    GameVars.health_bar = HealthBar.HealthBar(GameVars.current_enemy.health)
+    GameVars.word_state = GameVars.WORD_NOT_CREATED
+    GameVars.enemy_state = GameVars.ENEMY_ALIVE
 
-    GameVars.score_text.draw()
-    GameVars.lives_text.draw()
-    GameVars.time_text.draw()
+def set_and_draw_screen():
+    GameVars.word_to_type_text = text.create_word_to_type_text()
+    GameVars.letters_typed_text = text.create_letters_typed_text()
+    GameVars.enemy_group.draw(GameVars.SCREEN)
+    GameVars.health_bar.draw()
     GameVars.word_to_type_text.draw()
     GameVars.letters_typed_text.draw()
+
+def deal_damage_on_typing_word():
+    if GameVars.user_stack == GameVars.stack:
+        GameVars.current_enemy.health -= 10
+        GameVars.health_bar.current_health -= 10
+        GameVars.word_state = GameVars.WORD_NOT_CREATED
 
 def run_start_state():
     GameVars.title_text = text.create_title_text()
@@ -66,36 +65,23 @@ def run_game_state():
     GameVars.SCREEN.fill((0, 0, 0))
 
     if GameVars.enemy_state == GameVars.ENEMY_DEAD:
-        GameVars.current_enemy = Enemy.get_skeleton_enemy()
-        GameVars.enemy_group.add(GameVars.current_enemy)
-        GameVars.health_bar = HealthBar.HealthBar(GameVars.current_enemy.health)
-        GameVars.word_state = GameVars.WORD_NOT_CREATED
-        GameVars.enemy_state = GameVars.ENEMY_ALIVE
+        set_next_enemy()
 
     if GameVars.enemy_state == GameVars.ENEMY_ALIVE:
         if GameVars.word_state == GameVars.WORD_NOT_CREATED:
             get_next_word()
-            GameVars.word_state = GameVars.WORD_BEING_TYPED
-        GameVars.word_to_type_text = text.create_TT_word_to_type_text()
-        GameVars.letters_typed_text = text.create_TT_letters_typed_text()
-        if GameVars.user_stack == GameVars.stack:
-            GameVars.current_enemy.health -= 10
-            GameVars.health_bar.current_health -= 10
-            GameVars.word_state = GameVars.WORD_NOT_CREATED
+
+        deal_damage_on_typing_word()
 
         if (GameVars.current_enemy.health <= 0):
             GameVars.enemy_state = GameVars.ENEMY_DEAD
+            GameVars.enemy_group.empty()
 
-        GameVars.enemy_group.draw(GameVars.SCREEN)
-        GameVars.health_bar.draw()
-        GameVars.word_to_type_text.draw()
-        GameVars.letters_typed_text.draw()
+        set_and_draw_screen()
+        
     pygame.display.update()
 
-
-
-
-
+'''Typing Test Functions'''
 def run_typing_test_state():
     GameVars.SCREEN.fill((0, 0, 0))
 
@@ -112,7 +98,29 @@ def run_typing_test_state():
 
     set_and_draw_text()
 
-
 def run_end_state():
     GameVars.SCREEN.fill((0, 0, 0))
     text.draw_wrapped_congrats_text()
+
+def add_point():
+    GameVars.timer_running = False
+    GameVars.score += 1
+    if (GameVars.time_out > 2):
+        if GameVars.score % 3 == 0:
+            GameVars.time_out -= 1
+
+def subtract_life():
+    GameVars.lives -= 1
+    GameVars.timer_running = False
+
+def set_and_draw_text():
+    GameVars.score_text = text.create_score_text()
+    GameVars.lives_text = text.create_lives_text()
+    GameVars.time_text = text.create_time_text(GameVars.start_time)
+    GameVars.letters_typed_text = text.create_TT_letters_typed_text()
+
+    GameVars.score_text.draw()
+    GameVars.lives_text.draw()
+    GameVars.time_text.draw()
+    GameVars.word_to_type_text.draw()
+    GameVars.letters_typed_text.draw()

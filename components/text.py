@@ -75,6 +75,22 @@ def create_time_text(start_time):
                 GameVars.SCREEN_WIDTH //2 ,
                 GameVars.SCREEN_HEIGHT // 8)
 
+def create_word_to_type_text():
+    return Text(GameVars.SCREEN,
+                "".join(GameVars.stack),
+                100,
+                (255, 255, 255),
+                GameVars.SCREEN_WIDTH // 2,
+                GameVars.SCREEN_HEIGHT // 4)
+
+def create_letters_typed_text():
+    return Text(GameVars.SCREEN,
+                "".join(GameVars.user_stack),
+                100,
+                (255, 0, 255),
+                GameVars.SCREEN_WIDTH // 2,
+                (GameVars.SCREEN_HEIGHT // 3) * 2)
+
 def create_TT_letters_typed_text():
     return Text(GameVars.SCREEN,
                 "".join(GameVars.user_stack),
