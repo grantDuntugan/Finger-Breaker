@@ -67,6 +67,7 @@ def handle_start_keys(event):
 
 def handle_game_keys(event):
     if event.type == pygame.KEYDOWN:
+        pygame.mixer.music.play()
         if event.key == pygame.K_q:
             GameVars.user_stack.append("q")
         elif event.key == pygame.K_w:

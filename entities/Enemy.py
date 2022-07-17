@@ -2,7 +2,7 @@ import pygame
 from systems import GameVars
 
 skeleton_img = pygame.image.load("images/skeleton.png")
-
+bat_img = pygame.image.load("images/bat.png")
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, image, scale, x, y, health):
         pygame.sprite.Sprite.__init__(self)
@@ -21,3 +21,12 @@ def get_skeleton_enemy():
               50)
     skeleton.image.set_colorkey((255,255,255))
     return skeleton
+
+def get_bat_enemy():
+    bat = Enemy(bat_img,
+    1.5,
+    GameVars.SCREEN_WIDTH // 2,
+    GameVars.SCREEN_HEIGHT // 1.8,
+    90)
+    bat.image.set_colorkey((255,255,255))
+    return bat

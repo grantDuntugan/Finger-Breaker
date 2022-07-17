@@ -13,9 +13,8 @@ GameVars.SCREEN = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 GameVars.start_button = button.create_start_button()
 GameVars.health_bar = None
 GameVars.enemy_group = pygame.sprite.Group()
+pygame.mixer.music.load("sounds/typewriter-click (mp3cut.net).mp3")
 
-skele = Enemy.get_skeleton_enemy()
-GameVars.enemy_group.add(skele)
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

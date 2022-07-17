@@ -33,7 +33,11 @@ def end_game():
     GameVars.current_state = GameVars.END_STATE
 
 def set_next_enemy():
-    GameVars.current_enemy = Enemy.get_skeleton_enemy()
+    rng = random.randint(1, 2)
+    if rng == 1:
+        GameVars.current_enemy = Enemy.get_skeleton_enemy()
+    elif rng == 2:
+        GameVars.current_enemy = Enemy.get_bat_enemy()
     GameVars.enemy_group.add(GameVars.current_enemy)
     GameVars.health_bar = HealthBar.HealthBar(GameVars.current_enemy.health)
     GameVars.word_state = GameVars.WORD_NOT_CREATED
@@ -79,6 +83,7 @@ def run_game_state():
             GameVars.enemy_state = GameVars.ENEMY_DEAD
             GameVars.enemy_group.empty()
             GameVars.player_money += 10
+            GameVars.enemies_killed += 1
 
         set_and_draw_screen()
         

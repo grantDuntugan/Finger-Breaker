@@ -34,6 +34,7 @@ enemy_group = None
 player_money = 0
 player_money_text = None
 player_damage = 10
+enemies_killed = 0
 
 '''Typing Test Variables'''
 score = 0
