@@ -42,6 +42,8 @@ def set_next_enemy():
 def set_and_draw_screen():
     GameVars.word_to_type_text = text.create_word_to_type_text()
     GameVars.letters_typed_text = text.create_letters_typed_text()
+    GameVars.player_money_text = text.create_player_money_text()
+    GameVars.player_money_text.draw()
     GameVars.enemy_group.draw(GameVars.SCREEN)
     GameVars.health_bar.draw()
     GameVars.word_to_type_text.draw()
@@ -49,8 +51,8 @@ def set_and_draw_screen():
 
 def deal_damage_on_typing_word():
     if GameVars.user_stack == GameVars.stack:
-        GameVars.current_enemy.health -= 10
-        GameVars.health_bar.current_health -= 10
+        GameVars.current_enemy.health -= GameVars.player_damage
+        GameVars.health_bar.current_health -= GameVars.player_damage
         GameVars.word_state = GameVars.WORD_NOT_CREATED
 
 def run_start_state():
@@ -76,6 +78,7 @@ def run_game_state():
         if (GameVars.current_enemy.health <= 0):
             GameVars.enemy_state = GameVars.ENEMY_DEAD
             GameVars.enemy_group.empty()
+            GameVars.player_money += 10
 
         set_and_draw_screen()
         

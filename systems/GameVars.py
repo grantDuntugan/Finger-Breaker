@@ -31,6 +31,9 @@ title_text = None
 current_enemy = None
 health_bar = None
 enemy_group = None
+player_money = 0
+player_money_text = None
+player_damage = 10
 
 '''Typing Test Variables'''
 score = 0

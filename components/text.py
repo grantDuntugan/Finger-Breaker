@@ -91,6 +91,14 @@ def create_letters_typed_text():
                 GameVars.SCREEN_WIDTH // 2,
                 (GameVars.SCREEN_HEIGHT // 3) * 2)
 
+def create_player_money_text():
+    return Text(GameVars.SCREEN,
+        "Money: $" + str(GameVars.player_money),
+        100, (0, 250, 0),
+        GameVars.SCREEN_WIDTH//8,
+        GameVars.SCREEN_HEIGHT // 8)
+
+
 def create_TT_letters_typed_text():
     return Text(GameVars.SCREEN,
                 "".join(GameVars.user_stack),
