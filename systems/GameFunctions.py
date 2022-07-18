@@ -33,11 +33,7 @@ def end_game():
     GameVars.current_state = GameVars.END_STATE
 
 def set_next_enemy():
-    rng = random.randint(1, 2)
-    if rng == 1:
-        GameVars.current_enemy = Enemy.get_skeleton_enemy()
-    elif rng == 2:
-        GameVars.current_enemy = Enemy.get_bat_enemy()
+    GameVars.current_enemy = Enemy.get_random_enemy()
     GameVars.enemy_group.add(GameVars.current_enemy)
     GameVars.health_bar = HealthBar.HealthBar(GameVars.current_enemy.health)
     GameVars.word_state = GameVars.WORD_NOT_CREATED
@@ -47,11 +43,13 @@ def set_and_draw_screen():
     GameVars.word_to_type_text = text.create_word_to_type_text()
     GameVars.letters_typed_text = text.create_letters_typed_text()
     GameVars.player_money_text = text.create_player_money_text()
+    GameVars.player_damage_text = text.create_dpw_text()
     GameVars.player_money_text.draw()
     GameVars.enemy_group.draw(GameVars.SCREEN)
     GameVars.health_bar.draw()
     GameVars.word_to_type_text.draw()
     GameVars.letters_typed_text.draw()
+    GameVars.player_damage_text.draw()
 
 def deal_damage_on_typing_word():
     if GameVars.user_stack == GameVars.stack:

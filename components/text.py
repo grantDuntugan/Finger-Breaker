@@ -89,14 +89,23 @@ def create_letters_typed_text():
                 100,
                 (255, 0, 255),
                 GameVars.SCREEN_WIDTH // 2,
-                (GameVars.SCREEN_HEIGHT // 3) * 2)
+                (GameVars.SCREEN_HEIGHT // 2) * 1.5)
 
 def create_player_money_text():
     return Text(GameVars.SCREEN,
-        "Money: $" + str(GameVars.player_money),
-        100, (0, 250, 0),
-        GameVars.SCREEN_WIDTH//8,
-        GameVars.SCREEN_HEIGHT // 8)
+                "Money: $" + str(GameVars.player_money),
+                80,
+                (0, 250, 0),
+                GameVars.SCREEN_WIDTH // 8,
+                GameVars.SCREEN_HEIGHT // 8)
+
+def create_dpw_text():
+    return Text(GameVars.SCREEN,
+                "Damage: " + str(GameVars.player_damage) + "dpw",
+                80,
+                (0, 250, 0),
+                GameVars.SCREEN_WIDTH // 7,
+                (GameVars.SCREEN_HEIGHT // 8) * 2)
 
 
 def create_TT_letters_typed_text():
