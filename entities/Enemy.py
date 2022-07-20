@@ -17,16 +17,16 @@ class Enemy(pygame.sprite.Sprite):
 
 def get_skeleton_enemy():
     skeleton = Enemy(skeleton_img,
-              2.5,
+              GameVars.SCREEN_HEIGHT // 400,
               GameVars.SCREEN_WIDTH // 2,
-              GameVars.SCREEN_HEIGHT // 2,
+              GameVars.SCREEN_HEIGHT // 1.7,
               50)
     skeleton.image.set_colorkey((255,255,255))
     return skeleton
 
 def get_bat_enemy():
     bat = Enemy(bat_img,
-    1.5,
+    GameVars.SCREEN_HEIGHT // 800,
     GameVars.SCREEN_WIDTH // 2,
     GameVars.SCREEN_HEIGHT // 1.7,
     90)
@@ -35,7 +35,7 @@ def get_bat_enemy():
 
 def get_spider_enemy():
     spider = Enemy(spider_img,
-                   6,
+                   GameVars.SCREEN_HEIGHT // 200,
                    GameVars.SCREEN_WIDTH // 2,
                    GameVars.SCREEN_HEIGHT // 1.7,
                    90)
