@@ -56,6 +56,7 @@ def deal_damage_on_typing_word():
         GameVars.current_enemy.health -= GameVars.player_damage
         GameVars.health_bar.current_health -= GameVars.player_damage
         GameVars.word_state = GameVars.WORD_NOT_CREATED
+        GameVars.player_money += 3
 
 def run_start_state():
     GameVars.title_text = text.create_title_text()
@@ -80,11 +81,11 @@ def run_game_state():
         if (GameVars.current_enemy.health <= 0):
             GameVars.enemy_state = GameVars.ENEMY_DEAD
             GameVars.enemy_group.empty()
-            GameVars.player_money += 10
+            GameVars.player_money += 50
             GameVars.enemies_killed += 1
 
         set_and_draw_screen()
-        
+
     pygame.display.update()
 
 '''Typing Test Functions'''

@@ -127,9 +127,9 @@ def handle_game_keys(event):
         elif event.key == pygame.K_BACKSPACE and len(GameVars.user_stack) != 0:
             GameVars.user_stack.pop()
         elif event.key == pygame.K_UP:
-            if GameVars.player_money >= 15:
+            if GameVars.player_money >= 150:
                 GameVars.player_damage += 10
-                GameVars.player_money -= 15
+                GameVars.player_money -= 150
         elif event.key == pygame.K_ESCAPE:
             pygame.quit()
             quit()
