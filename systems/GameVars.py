@@ -48,6 +48,7 @@ start_time = 0
 score_text = None
 lives_text = None
 time_text = None
+instructions_text = None
 
 """Shared Game and Typing Test Variables"""
 stack = []  # Keeps track of typing order
